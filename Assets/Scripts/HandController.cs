@@ -1,9 +1,13 @@
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class HandController : MonoBehaviour
 {
     public InputActionAsset playerController;
+    public GameObject leftHand;
+    public GameObject rightHand;
 
     InputAction LeftTriggerButton;
     InputAction LeftGripButton;
@@ -93,10 +97,14 @@ public class HandController : MonoBehaviour
         if (GameObject.Find("Drone").activeInHierarchy)
         {
             Destroy(GameObject.Find("Drone"));
+            leftHand.SetActive(true);
+            rightHand.SetActive(true);
         }
         else
         {
-            Instantiate(dronePrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z + 1), Quaternion.identity);
+            leftHand.SetActive(false);
+            rightHand.SetActive(false);
+            Instantiate(dronePrefab, new Vector3(transform.position.x, 0, transform.position.z - 3), Quaternion.identity);
         }
     }
     private void ButtonB_Function(InputAction.CallbackContext context)

@@ -37,9 +37,14 @@ public class Drone : MonoBehaviour
     }
 
     //drone movement in X and Z Axis
-    private void movement()
+    private void droneMovement()
     {
-        GetComponent<Rigidbody>().velocity = new Vector3(_HandController.getRightThumbValue.x, 0, _HandController.getRightThumbValue.y);
+        GetComponent<Rigidbody>().velocity = new Vector3(_HandController.getLeftThumbValue.x, 0, _HandController.getRightThumbValue.y);
+    }
+
+    private void droneRotation()
+    {
+        GetComponent<Transform>().rotation = new Quaternion(_HandController.getRightThumbValue.x, 0, 0, 0);
     }
 
     //drone going to lend
@@ -53,7 +58,8 @@ public class Drone : MonoBehaviour
 
     private void Update()
     {
-        movement();
+        droneMovement();
+        droneRotation();
         takeOff();
         Lending();
     }
